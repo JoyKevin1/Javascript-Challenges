@@ -1,5 +1,5 @@
 body {
-    background: #ccc;
+    background: rgb(255, 255, 255);
 }
 
 .selections {
@@ -18,4 +18,33 @@ body {
 
 .selection:hover {
     transform: scale(1.1);
+}
+
+span {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.results {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.result-score {
+    margin-left: 0.1rem;
+    font-size: 1rem;
+    color: rgb(31, 165, 255);
+}
+
+.result-selection {
+opacity: .6;
+font-size: 1.8rem;
+}
+
+.result-selection.winner {
+opacity: 1;
+font-size: 2rem;
 }
