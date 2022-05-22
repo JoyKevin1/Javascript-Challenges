@@ -1,4 +1,5 @@
 const selectionButtons = document.querySelectorAll(`[data-selection]`)
+const finalColumn = document.querySelector(`[data-final-column]`)
 
 const SELECTIONS = [
     {
@@ -23,12 +24,36 @@ const SELECTIONS = [
 selectionButtons.forEach(selectionButton => {
     selectionButton.addEventListener('click', e => {
 const selectionName = selectionButton.dataset.selection
-SELECTIONS.find(selection => selection.name === selectionName)
-makeSelection(selectionName)
+const selection = SELECTIONS.find(selection => selection.name === selectionName)
+makeSelection(selection)
     })
 })
 
 
 function makeSelection(selection){
-    console.log(selection)
+    const computerSelection = randomSelection()
+    const yourWinner = isWinner(selection, computerSelection)
+    const computerWinner = isWinner(computerSelection, selection)
+    console.log(computerSelection)
+    AddSelectionResult(computerSelection, computerWinner)
+    AddSelectionResult(selection, yourWinner)
+}
+
+function AddSelectionResult(selection, winner) {
+    const div = document.createElement('div')
+    div.innerText = selection.emoji
+    div.classList.add('result-selection')
+
+    if(winner) div.classList.add('winner')
+    finalColumn.after(div)
+}
+
+function randomSelection() {
+    const randomIndex =  Math.floor(Math.random() * SELECTIONS.length)
+
+    return SELECTIONS[randomIndex]
+}
+
+function isWinner (selection, opponentSelection) {
+    return selection.beats === opponentSelection.name
 }
